@@ -1,0 +1,16 @@
+/* landing.css */
+@keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(0px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(20px);
+    }
+  }
+  
+  .animate-fade-in-down {
+    animation: fade-in-down 1.5s ease-out forwards;
+  }
+  
