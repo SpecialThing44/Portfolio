@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./landing.css";
-import Navbar from "../../components/navbar/navbar";
 
 const LandingPage = () => {
 
@@ -18,10 +17,12 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="overflow-hidden">
-      <Navbar />
-      <div className="bg-gray-900 min-h-screen flex justify-center font-mono border-b border-gray-500">
+    <body>
+    <div className="overflow-hidden poggers">
+      <div className="bg-gray-900 min-h-screen flex justify-center font-mono border-b border-gray-500 ">
+        
         <div className="text-center text-white max-w-2xl mx-auto  mt-32">
+          
           <p className="text-4xl font-bold animate-fade-in-down">Hi There</p>
           <p
             className="text-2xl opacity-0 animate-fade-in-down mt-6 pb-32"
@@ -37,7 +38,7 @@ const LandingPage = () => {
               onClick={handleScrollDown}
             >
               <svg
-                class="w-6 h-6 text-violet-500"
+                class="w-6 h-6 text-violet-500 "
                 fill="none"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -52,7 +53,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="bg-gray-900 min-h-screen flex justify-center font-mono">
-        <div className="bg-white dark:bg-slate-800 w-3/4 p-8 mt-16 mx-auto text-gray-800 max-h-96 dark:text-white overflow-y-auto">
+        <div className="bg-white dark:bg-slate-800 w-3/4 p-8 mt-24 mx-auto text-gray-800 max-h-96 dark:text-white overflow-y-auto">
           <h2 className="text-4xl font-bold mb-4">About Me</h2>
           <p className="text-lg">
             Welcome to my personal space! I'm passionate about [your interests].
@@ -62,7 +63,9 @@ const LandingPage = () => {
           {/* Add more content as needed */}
         </div>
       </div>
+      
     </div>
+    </body>
   );
 };
 

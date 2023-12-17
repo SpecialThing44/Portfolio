@@ -1,8 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-
+  const navigate = useNavigate();
+  const viewNavigate = (newRoute) => {
+    // Navigate to the new route
+    if (!document.startViewTransition) {
+      return navigate(newRoute);
+    } else {
+      return document.startViewTransition(() => {
+        navigate(newRoute);
+      });
+    }
+  };
 
   return (
     <nav
@@ -14,15 +24,21 @@ const Navbar = () => {
         </Link>
 
         <div className="text-lg space-x-7">
-          <Link to="/" className=" hover:text-slate-200">
+        <button  className=" hover:text-slate-200" onClick={() => {
+            viewNavigate("/");
+          }}>
             Home
-          </Link>
-          <Link to="/projects" className=" hover:text-slate-200">
+          </button>
+          <button  className=" hover:text-slate-200" onClick={() => {
+            viewNavigate("/projects");
+          }}>
             Projects
-          </Link>
-          <Link to="/contact" className=" hover:text-slate-200">
+          </button>
+          <button  className=" hover:text-slate-200" onClick={() => {
+            viewNavigate("/contact");
+          }}>
             Contact
-          </Link>
+          </button>
           {/* Add more navigation links as needed */}
         </div>
       </div>
