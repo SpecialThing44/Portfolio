@@ -6,10 +6,13 @@ import { useEffect } from 'react';
 
 
 //import './App.css'
+import { ThemeProvider } from './contexts/themeContext';
 import './styles/global.css';
 import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
 import Landing from './pages/landing/landing';
 import PageNotFound from './pages/page-not-found/page-not-found';
+import Contact from './pages/contact/contact';
 
 
 
@@ -28,6 +31,7 @@ function RoutesWithTransitions() {
         <Routes location={location}>
           <Route path="" element={<Landing />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
@@ -36,10 +40,13 @@ function RoutesWithTransitions() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <RoutesWithTransitions />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Navbar />
+        <RoutesWithTransitions />
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
