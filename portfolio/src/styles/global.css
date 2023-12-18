@@ -20,9 +20,6 @@
     transition: opacity 500ms;
   }
 
-  body, #root {
-    background-color: #111827;
-  }
 /* This will affect the entire page */
 * {
     scrollbar-width: thin; /* "auto" or "thin"  */
@@ -53,3 +50,5 @@
   html {
     overflow-y: scroll;
   }
+
+  

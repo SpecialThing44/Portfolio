@@ -20,3 +20,8 @@
   .animate-hover:hover {
     transform: scale(1.3);
   }
+
+  .container {
+    overflow-x: auto;
+    white-space: nowrap;
+  }

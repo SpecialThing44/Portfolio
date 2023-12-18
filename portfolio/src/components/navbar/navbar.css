@@ -1,0 +1,17 @@
+
+@media (min-width: 800px) {
+    .lg\:hidden {
+      display: none;
+    }
+  
+    .lg\:flex {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .theme-text {
+      display: none;
+    }
+  }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { ThemeContext } from '../../contexts/themeContext';
 import { getThemeStyles } from '../../utils/themeStyles';
 import { FaSchool } from "react-icons/fa";
@@ -7,12 +7,6 @@ import { FaCity } from "react-icons/fa";
 import { ImLab } from "react-icons/im";
 import { GiArchiveResearch } from "react-icons/gi";
 
-
-
-
-
-
-
 import "./landing.css";
 
 const LandingPage = () => {
@@ -20,59 +14,33 @@ const LandingPage = () => {
   const { theme } = useContext(ThemeContext);
   const { backgroundColor, textColor, boxColor } = getThemeStyles(theme);
 
-  const timeline = [
-    { year: 2016, event: 'Started high school', label: 'school' },
-    { year: 2020, event: 'Graduated high school', label: 'graduation' },
-    { year: 2020, event: 'Moved to Toronto', label: 'city' },
-    { year: 2020, event: 'Started university', label: 'school' },
-    { year: 2022, event: 'Started working at Pardee Lab', label: 'lab' },
-    { year: 2023, event: 'Published Paper', label: 'research' },
-    { year: 2025, event: 'Graduated University', label: 'graduation' },
-    // Add more events...
+  const displayedEvents = [
+    { year: 2017, event: 'Started high school', label: 'school' },
+    { year: 2021, event: 'Graduated high school', label: 'graduation' },
+    { year: 2021, event: 'Moved to Toronto', label: 'city' },
+    { year: 2021, event: 'Started university', label: 'school' },
+    { year: 2023, event: 'Started working at Pardee Lab', label: 'lab' },
+    { year: 2024, event: 'Published Paper', label: 'research' },
+    { year: 2024, event: 'Started working at Garner', label: 'lab' },
+    { year: 2026, event: 'Graduated University', label: 'graduation' },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(timeline.length - 1);
-  const [displayedEvents, setDisplayedEvents] = useState([]);
+  const scrollContainer = useRef(null);
 
-
-  const handlePrev = () => {
-    if (currentIndex > 0 && currentIndex > displayedEvents.length - 1) {
-      setCurrentIndex(currentIndex - 1);
-    }
+  // Modify your handleNext and handlePrev functions
+  const handleNext = () => {
+    scrollContainer.current.scrollTo({
+      left: scrollContainer.current.scrollLeft + 200, // adjust scroll amount as needed
+      behavior: 'smooth'
+    });
   };
   
-  const handleNext = () => {
-    if (currentIndex < timeline.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
+  const handlePrev = () => {
+    scrollContainer.current.scrollTo({
+      left: scrollContainer.current.scrollLeft - 200, // adjust scroll amount as needed
+      behavior: 'smooth'
+    });
   };
-
-  useEffect(() => {
-
-    const updateDisplayedEvents = () => {
-      const windowWidth = window.innerWidth;
-      let numDisplayedEvents = 5;
-
-      if (windowWidth < 768) {
-        numDisplayedEvents = 3;
-      } else if (windowWidth < 1024) {
-        numDisplayedEvents = 4;
-      }
-
-      const startIndex = Math.max(0, currentIndex - numDisplayedEvents + 1);
-      const endIndex = currentIndex + 1;
-      const events = timeline.slice(startIndex, endIndex).reverse();
-      setDisplayedEvents(events);
-    };
-
-    updateDisplayedEvents();
-
-    window.addEventListener("resize", updateDisplayedEvents);
-    return () => {
-      window.removeEventListener("resize", updateDisplayedEvents);
-    };
-  }, [currentIndex, timeline]);
-
   
   const handleScrollDown = () => {
     const windowHeight = window.innerHeight;
@@ -80,7 +48,7 @@ const LandingPage = () => {
 
     // Auto-scroll down the length of the page
     window.scrollTo({
-      top: documentHeight - windowHeight - 100,
+      top: documentHeight - windowHeight - 100 - 20,
       behavior: "smooth",
     });
 
@@ -123,7 +91,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className={`${backgroundColor} min-h-full flex justify-center font-mono`}>
-        <div className={`${boxColor} w-3/4 p-8 mt-24 mb-24 mx-auto ${textColor} overflow-y-auto`}>
+        <div className={`${boxColor} w-3/4 p-8 mt-16 mb-12 mx-auto ${textColor} overflow-y-auto`}>
           <h2 className="text-4xl font-bold mb-4">About Me</h2>
           <p className="text-lg">
             <p className="text-lg">
@@ -149,9 +117,11 @@ const LandingPage = () => {
 
         
       </div>
-      <div className={`${backgroundColor} ${textColor} w-3/4 mx-auto mb-5 font-mono`}>
+      <div className={`${backgroundColor} ${textColor} w-3/4 mx-auto mb-5 font-mono `}>
+        <h2 className="text-4xl font-bold mb-4 text-center ">Timeline</h2>
         <div className="flex justify-between items-center">
-          <button onClick={handleNext}>
+
+          <button onClick={handlePrev}>
             <svg
               className="w-6 h-6 text-violet-500"
               fill="none"
@@ -164,19 +134,21 @@ const LandingPage = () => {
               <path d="M15 19l-7-7 7-7"></path>
             </svg>
           </button>
-          {displayedEvents.map((event, index) => (
-            <div key={index} className="text-center flex flex-col items-center">
-              <h2 className="ml-2 mr-2 text-center animate-hover">{event.year}</h2>
-              <p className="ml-2 mr-2 text-center">{event.event}</p>
-              {event.label === 'school' && <FaSchool className="mt-2"/>}
-              {event.label === 'city' && <FaCity className="mt-2"/>}
-              {event.label === 'graduation' && <FaGraduationCap className="mt-2"/>}
-              {event.label === 'university' && <FaSchool className="mt-2"/>}
-              {event.label === 'lab' && <ImLab className="mt-2"/>}
-              {event.label === 'research' && <GiArchiveResearch className="mt-2"/>}
-            </div>
-          ))}
-          <button onClick={handlePrev}>
+          <div ref={scrollContainer} className="flex justify-between items-center overflow-x-auto whitespace-normal w-min">
+            {displayedEvents.map((event, index) => (
+              <div key={index} className="text-center flex flex-col items-center w-40 m-5">
+                <h2 className="text-center animate-hover">{event.year}</h2>
+                <p className="text-center h-12 w-40">{event.event}</p>
+                {event.label === 'school' && <FaSchool className="mt-2 mb-2" />}
+                {event.label === 'city' && <FaCity className="mt-2 mb-2" />}
+                {event.label === 'graduation' && <FaGraduationCap className="mt-2 mb-2" />}
+                {event.label === 'university' && <FaSchool className="mt-2 mb-2" />}
+                {event.label === 'lab' && <ImLab className="mt-2 mb-2" />}
+                {event.label === 'research' && <GiArchiveResearch className="mt-2 mb-2" />}
+              </div>
+            ))}
+          </div>
+          <button onClick={handleNext}>
             <svg
               className="w-6 h-6 text-violet-500"
               fill="none"
