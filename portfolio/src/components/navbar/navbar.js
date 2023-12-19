@@ -19,7 +19,7 @@ const Navbar = () => {
     }
   };
 
-
+ 
 
   return (
 <nav className="bg-gray-900 z-10 text-slate-300 p-4 fixed w-full border-b border-gray-500">
@@ -40,6 +40,9 @@ const Navbar = () => {
       </button>
       <button className="hover:text-slate-200" onClick={() => viewNavigate("/projects")}>
         Projects
+      </button>
+      <button className="hover:text-slate-200" onClick={() => viewNavigate("/resume")}>
+        Resume
       </button>
       <button className="hover:text-slate-200" onClick={() => viewNavigate("/contact")}>
         Contact
