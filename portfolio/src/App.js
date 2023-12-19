@@ -26,7 +26,7 @@ function RoutesWithTransitions() {
       <CSSTransition
         key={location.key}
         classNames="fade"
-        timeout={1000}
+        timeout={1100}
       >
         <Routes location={location}>
           <Route path="" element={<Landing />} />
