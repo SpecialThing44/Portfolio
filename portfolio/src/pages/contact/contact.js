@@ -1,11 +1,14 @@
 // portfolio/src/pages/contact/contact.js
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../contexts/themeContext';
 import { getThemeStyles } from '../../utils/themeStyles';
 
 function Contact() {
     const { theme } = useContext(ThemeContext);
     const { backgroundColor, textColor } = getThemeStyles(theme);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
     const handleSendEmail = () => {
         const name = document.getElementById('name').value;
