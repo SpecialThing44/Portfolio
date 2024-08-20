@@ -1,0 +1,8 @@
+@media (max-width: 1024px) {
+  .lg\\:hidden {
+    display: block;
+  }
+  .li {
+    margin-bottom: 30px;
+  }
+}

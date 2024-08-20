@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+/* This will affect the entire page */
+* {
+  scrollbar-width: thin; /* "auto" or "thin"  */
+  scrollbar-color: #888 #f5f5f5; /* thumb and track color */
+}
+
+/* Total width and height of the scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+/* Scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px; /* if you want a rounded scrollbar */
+}
+
+/* Scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+html {
+  overflow-y: scroll;
+}

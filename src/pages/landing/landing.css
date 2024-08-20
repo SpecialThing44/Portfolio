@@ -1,0 +1,27 @@
+/* landing.css */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 1.5s ease-out forwards;
+}
+.animate-hover {
+  transition: transform 0.3s ease;
+}
+
+.animate-hover:hover {
+  transform: scale(1.3);
+}
+
+.container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
